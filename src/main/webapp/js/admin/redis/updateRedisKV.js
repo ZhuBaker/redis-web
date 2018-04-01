@@ -263,7 +263,7 @@ $(document).ready(function() {
 	
 	$(".edit_btn").on("click", function() {
 		
-		var checkedNum = $("#listTable").find("input:checkbox[name='redisKey']:checked").length;
+		var checkedNum = $("#listTable").find("input:input:checkbox[name='redisKey']:checked").length;
 		if(checkedNum > 1||checkedNum<=0) {
 			$("#model_title").text("warning");
 			$("#model_content").text("please choose one to edit");
@@ -351,6 +351,10 @@ $(document).ready(function() {
 					$("#updateModal_dataType").val(dataType);
 				}
 				$('#'+ dataType + 'FormTable').tableData(data.data.values); 
+				$("#HASHFormTable tr").each(function(idx, ele){
+					$(this).find("td").first().prop("title",$(this).find("input").first().val());
+					$(this).find("td").eq(1).prop("title",$(this).find("input").last().val());
+				});
 				$("#updateModal").modal('show');
 			}
 		});

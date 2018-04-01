@@ -8,26 +8,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>redis-admin</title>
+<title>redis-web</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favicon.ico" /> 
+<link href="${pageContext.request.contextPath}/bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet"><!-- MetisMenu CSS -->
 <link href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"><!-- Custom Fonts -->
 <link href="${pageContext.request.contextPath}/sb-admin/css/timeline.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/sb-admin/css/sb-admin-2.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/ztree/zTreeStyle.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/jquery.mloading.css" rel="stylesheet">
 
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap-switch/dist/js/bootstrap-switch.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.table.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.cookie.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.pagination.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.ztree.all-3.5.min.js"></script>
 <script src="${pageContext.request.contextPath}/sb-admin/js/sb-admin-2.js"></script>
+<script src="${pageContext.request.contextPath}/js/admin/redisSerializer.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.mloading.js"></script>
+
 </head>
 
 <body>
 	
 	<jsp:include page="common/modelDialog.jsp"></jsp:include>
+    <jsp:include page="setSerializer.jsp"></jsp:include>
 	
 	<div id="wrapper">
 	
@@ -51,6 +60,22 @@
 	
 	<script>
 		$(document).ready(function() {
+
+			$.ajaxSetup({
+			    type:"post",
+			    //请求失败遇到异常触发
+			    error: function (msg) {
+			    	var data = {};
+			    	data.returnmsg = msg.statusText;
+			    	data.returnmemo = msg.statusText;
+			        data.returncode = msg.status;
+			        if(msg.status==403){
+			        	data.returnmemo = "需要管理员权限";
+			        }
+			        modelAlert(data);
+			    }
+			})
+
 			$(".refresh_a").on("click", function() {
 				var value1 = $(this).attr("value1");
 				var url = "${pageContext.request.contextPath}/redis/refreshMode";
@@ -76,6 +101,10 @@
 					})
 				}
 			});
+			
+			//初始化bootstrap-switch
+			//$("input[type=\"checkbox\"], input[type=\"radio\"]").not("[data-switch-no-init]").bootstrapSwitch();
+			$("#setModal_enableDefaultSerializer").bootstrapSwitch();
 		})
 		
 	</script>

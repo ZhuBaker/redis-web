@@ -5,12 +5,17 @@
 	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 	</button>
-	<a class="navbar-brand" href="${pageContext.request.contextPath}/redis">redis-admin</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/redis">redis-web</a>
 </div>
 <!-- /.navbar-header -->
 
 <ul class="nav navbar-top-links navbar-right">
 	<span>&nbsp;</span>
+	<li>
+		<a data-toggle="modal" data-target="#setSerializerModal" href="#">
+	        <i class="glyphicon glyphicon-cog"></i>
+	    </a>
+	</li>
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
 		<!-- refresh-mode -->

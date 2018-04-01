@@ -150,7 +150,7 @@
 					<table id="ZSETFormTable" class="table table-striped table-bordered" >
 						<thead>
 							<tr>
-								<th class="col-sm-5 col-lg-5">score</th>
+								<th class="col-sm-2 col-lg-2">score</th>
 								<th>member</th>
 								<th class="col-sm-1 col-lg-1">operation</th>
 							</tr>
@@ -183,9 +183,9 @@
 					<table id="HASHFormTable" class="table table-striped table-bordered" >
 						<thead>
 							<tr>
-								<th class="col-sm-5 col-lg-5">field</th>
-								<th>value</th>
-								<th class="col-sm-1 col-lg-1">operation</th>
+								<th class="col-sm-4 col-lg-4 text-center">field</th>
+								<th class="text-center">value</th>
+								<th class="col-sm-1 col-lg-1 text-center">operation</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -9,8 +9,8 @@
 <div class="col-sm-12 col-md-12 main">
 	
 	<div class="col-sm-3 col-md-3">
-		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addServerModal" data-whatever="addServer">addServer</button>
-		<button type="button" class="refresh_btn btn btn-default" >refresh</button>
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addServerModal" data-whatever="addServer" title="添加Redis服务器">addServer</button>
+		<button type="button" class="reload_btn btn btn-default" title="重载Redis服务器">reload</button>
 	</div>
 	
 	<div class="row col-sm-offset-3 col-md-offset-3 ">
@@ -133,7 +133,6 @@
 			window.location.href = basePath + '/redis/stringList/' + serverName + '/' + dbIndex;
 		});
 		
-		
 		$(".delete_btn").on("click", function() {
 			var operator = $(this).attr("value1");
 			var url = "<%=basePath%>/redis/delKV";
@@ -184,6 +183,21 @@
 				}
 			})
 		})
+		$("#listTable tr.redisKey").on("click", function() {
+			$("#listTable").find("input:checkbox[name='redisKey']:checked").prop('checked', false);
+			$(this).find('input:checkbox').prop('checked', true);
+		})
+		$("input[name='redisKey']").on("click", function(e) {
+            $(this).find('input:checkbox').prop('checked', true);
+            e.stopPropagation();
+        })
+        
+        $("#query_input").on("keydown", function(event){
+		    var e = event || window.event || arguments.callee.caller.arguments[0];
+		    if(e && e.keyCode==13){ // enter 键
+		         $("#query_btn").trigger("click");
+		    }
+		});
 	});
 </script>
 

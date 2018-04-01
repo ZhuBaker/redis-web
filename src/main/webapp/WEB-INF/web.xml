@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <display-name>redis monitor</display-name>
-
+    <display-name>redis web</display-name>
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>redis-web</param-value>
+    </context-param>
     <context-param>
         <param-name>log4jConfigLocation</param-name>
         <param-value>classpath:log4j.xml</param-value>
@@ -19,7 +22,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>com.mauersu.config.MonitorConfig</param-value>
+        <param-value>com.arronlong.redisweb.config.MonitorConfig</param-value>
     </context-param>
 
     <listener>
@@ -53,7 +56,7 @@
     
     <filter>
         <filter-name>cleanContext</filter-name>
-        <filter-class>com.mauersu.filter.CleanContextFilter</filter-class>
+        <filter-class>com.arronlong.redisweb.filter.CleanContextFilter</filter-class>
     </filter>
 
     <filter-mapping>

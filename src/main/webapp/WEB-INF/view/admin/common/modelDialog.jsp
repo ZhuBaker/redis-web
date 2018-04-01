@@ -28,6 +28,7 @@
 	
 	
 	<script>
+	
 	function modelAlert(data) {
 		if (data.returncode == "200") {
 			$("#model_title").text(data.returnmsg);
@@ -40,6 +41,12 @@
 		}
 	}
 	
+	$(document).ready(function() {
+	    // 通过该方法来为每次弹出的模态框设置最新的zIndex值，从而使最新的modal显示在最前面
+	    $('#myModal').on('show.bs.modal', function() {
+	    	$("#myModal").css("z-index",2000);
+	    });
+	});
 	</script>
 </div>
 <!-- /.modal -->

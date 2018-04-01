@@ -1,10 +1,19 @@
 $(document).ready(function() {
 	var url = basePath + '/redis/serverTree';
 	initZTree(url);
-	$(".refresh_btn").on("click", function() {
-		var url = basePath + '/redis/refresh';
-		refreshZTree(url);
+	$(".reload_btn").on("click", function() {
+		$("body").mLoading();
+		setTimeout(function(){
+			var url = basePath + '/redis/reloadServer';
+			refreshZTree(url);
+		}, 10);
+		//$("body").mLoading("hide")
 	});
+	
+    $(".refresh_btn").on("click", function() {
+        var url = basePath + '/redis/refresh';
+        refreshZTree(url);
+    });
 	
 	$(".addServer_btn").on("click", function() {
 		var url = basePath + '/redis/addServer';
