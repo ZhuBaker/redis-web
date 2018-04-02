@@ -16,6 +16,7 @@
 package com.arronlong.redisweb.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -23,7 +24,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -46,13 +49,15 @@ public class Security extends WebSecurityConfigurerAdapter {
     }
 
 	protected void configure(HttpSecurity http) throws Exception {
-		http.headers().frameOptions().disable();//关闭iframe限制
         http.authorizeRequests()//该方法所返回的对象的方法来配置请求级别的安全细节
 //                .anyRequest().permitAll()
         		//定义路径保护的配置方法
                 .antMatchers("/*/update*", "/*/del*").hasRole("MANAGER")
                 .antMatchers(HttpMethod.POST, "/redis/KV").hasRole("MANAGER")
+		        .antMatchers(HttpMethod.OPTIONS).permitAll() //忽略所有的options方法
                 .anyRequest().authenticated()
-                .and().csrf().disable().httpBasic();
+                .and().httpBasic();
+        http.csrf().disable();//禁用CSRF
+        http.headers().frameOptions().disable();//关闭iframe限制
     }
 }
