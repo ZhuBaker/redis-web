@@ -296,10 +296,12 @@ public class RedisController extends RedisApplication implements Constant {
 		if (cookie == null) {
 			cookie = CookieUtil.getCookie(request, Constrants.REDIS_SERIALIZER);
 			if (cookie != null) {
-				RedisSerializerSetting settings = JSONArray.parseObject(cookie.getValue(), RedisSerializerSetting.class);
-				WebRuntimeContextHolder.getRuntimeContext().setRedisSerializerSetting(settings);
-				// 重新初始化连接池
-				context.reInitRedisServers();
+				try {
+					RedisSerializerSetting settings = JSONArray.parseObject(cookie.getValue(), RedisSerializerSetting.class);
+					WebRuntimeContextHolder.getRuntimeContext().setRedisSerializerSetting(settings);
+					// 重新初始化连接池
+					context.reInitRedisServers();
+				} catch (Exception e) {}
 			}
 		}
 	}
