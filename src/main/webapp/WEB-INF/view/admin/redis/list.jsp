@@ -54,7 +54,7 @@
 		<table id="listTable" class="table table-striped" >
 			<thead>
 				<tr>
-					<th>#</th>
+					<th><input type="checkbox" id="All"></th>
 					<th>index</th>
 					<th>key</th>
 					<c:if test="${showType == 'show' }">
@@ -197,6 +197,10 @@
 		    if(e && e.keyCode==13){ // enter 键
 		         $("#query_btn").trigger("click");
 		    }
+		});
+		
+		$("#All").change(function() { 
+			$("#listTable tbody input[type=checkbox]").prop("checked", $(this).is(':checked')); 
 		});
 	});
 </script>
